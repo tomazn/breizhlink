@@ -1,6 +1,8 @@
 package Breizhlink;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +51,13 @@ public class urlin extends HttpServlet {
 		beanUrl.setUrlReveal(urlReveal);
 		
 		request.setAttribute("url", beanUrl);
+		
+		try {
+			beanUrl.save();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.getServletContext().getRequestDispatcher( "/index.jsp" ).forward( request, response );
 	}

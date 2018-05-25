@@ -1,8 +1,21 @@
 package beanUrl;
 
+import java.sql.SQLException;
+
+import dao.DAObeanUrl;
+
 public class beanUrl {
 	private String url;
 	private String urlShort;
+	private String urlReveal;
+	
+	public beanUrl() {
+		this.url = "";
+		this.urlShort = "";
+		this.urlReveal = "";
+	}
+
+	
 	public String getUrlShort() {
 		return urlShort;
 	}
@@ -18,13 +31,7 @@ public class beanUrl {
 	public void setUrlReveal(String urlReveal) {
 		this.urlReveal = urlReveal;
 	}
-
-	private String urlReveal;
 	
-	public beanUrl() {
-		this.url = "";
-	}
-
 	public String getUrl() {
 		return url;
 	}
@@ -33,5 +40,8 @@ public class beanUrl {
 		this.url = url;
 	}
 	
+	public void save() throws SQLException {
+		DAObeanUrl.save(this);
+	}
 	
 }
