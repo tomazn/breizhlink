@@ -1,6 +1,8 @@
 package beanUrl;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dao.DAObeanUrl;
 
@@ -42,6 +44,11 @@ public class beanUrl {
 	
 	public void save() throws SQLException {
 		DAObeanUrl.save(this);
+	}
+	
+	public static ArrayList<beanUrl> getAllUrl() throws SQLException {
+		return DAObeanUrl.getAllUrl();
+		
 	}
 	
 }
