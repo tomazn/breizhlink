@@ -39,6 +39,7 @@ public class urlin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getParameter("url");
+		String password = request.getParameter("password");
 		
 		urlShortener u = new urlShortener(5, "http://localhost:8080/breizhlink/");
 		
@@ -49,6 +50,7 @@ public class urlin extends HttpServlet {
 		beanUrl.setUrl(url);
 		beanUrl.setUrlShort(urlShort);
 		beanUrl.setUrlReveal(urlReveal);
+		beanUrl.setPassword(password);
 		
 		request.setAttribute("url", beanUrl);
 		

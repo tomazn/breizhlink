@@ -10,14 +10,26 @@ public class beanUrl {
 	private String url;
 	private String urlShort;
 	private String urlReveal;
+	private String password;
 	
 	public beanUrl() {
 		this.url = "";
 		this.urlShort = "";
 		this.urlReveal = "";
+		this.password = "";
 	}
 
 	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	public String getUrlShort() {
 		return urlShort;
 	}

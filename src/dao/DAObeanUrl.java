@@ -16,6 +16,7 @@ public class DAObeanUrl {
 		String db_pwd = "root";
 		try {
 			java.sql.Connection conn = db.init(db_root,db_user,db_pwd);
+			System.out.println(conn);
 			return conn;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -26,11 +27,13 @@ public class DAObeanUrl {
 
 	public static void save(beanUrl beanUrl) throws SQLException {
 		try {
-		java.sql.Connection	conn= initDB();
-		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal) VALUES (?,?,?);");
+		java.sql.Connection conn= initDB();
+		System.out.println(conn);
+		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password) VALUES (?,?,?,?);");
 		insertUrl.setString(1,beanUrl.getUrl()); 
 		insertUrl.setString(2,beanUrl.getUrlShort()); 
 		insertUrl.setString(3,beanUrl.getUrlReveal()); 
+		insertUrl.setString(4,beanUrl.getPassword());
 		
 		insertUrl.executeUpdate();
 		
