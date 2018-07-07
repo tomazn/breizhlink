@@ -1,4 +1,4 @@
-package beanUrl;
+package bean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

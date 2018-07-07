@@ -61,7 +61,7 @@
 <%@ include file="urlin.jsp" %>
 
 <% if(request.getAttribute("url") != null){ %>
-<jsp:useBean id="url" scope="session" class="beanUrl.beanUrl"/>
+<jsp:useBean id="url" scope="session" class="bean.beanUrl"/>
 Votre url raccourcie : <a href="<jsp:getProperty name="url" property="urlShort"/>"><jsp:getProperty name="url" property="urlShort"/></a>
 <% } %>
 

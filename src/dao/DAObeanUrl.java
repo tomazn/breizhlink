@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DB.db;
-import beanUrl.beanUrl;
+import bean.beanUrl;
 
 public class DAObeanUrl {
 	
