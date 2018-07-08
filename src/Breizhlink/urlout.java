@@ -38,7 +38,7 @@ public class urlout extends HttpServlet {
 			urlOut = urlOut.getOne(id);
 			
 			if(urlOut != null) {
-				System.out.println(urlOut.getUrl());
+				response.sendRedirect(urlOut.getUrl());
 			}else {
 				response.sendRedirect("error.jsp");
 			}
