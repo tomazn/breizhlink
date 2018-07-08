@@ -3,6 +3,15 @@
   <display-name>Ma servlet</display-name>
   <description>Ma servlet</description>
   
+        <servlet>
+    <servlet-name>urlout</servlet-name>
+    <servlet-class>Breizhlink.urlout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>urlout</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Index</servlet-name>
     <servlet-class>Breizhlink.Index</servlet-class>
@@ -50,6 +59,10 @@
   <context-param>
     <param-name>db_pwd</param-name>
     <param-value>root</param-value>
+  </context-param>
+    <context-param>
+    <param-name>root_domain</param-name>
+    <param-value>http://localhost:8080/breizhlink</param-value>
   </context-param>
   <error-page>
     <error-code>404</error-code>

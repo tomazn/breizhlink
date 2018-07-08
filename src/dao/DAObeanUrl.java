@@ -28,12 +28,12 @@ public class DAObeanUrl {
 	public static void save(beanUrl beanUrl) throws SQLException {
 		try {
 		java.sql.Connection conn= initDB();
-		System.out.println(conn);
-		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password) VALUES (?,?,?,?);");
+		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort) VALUES (?,?,?,?,?);");
 		insertUrl.setString(1,beanUrl.getUrl()); 
 		insertUrl.setString(2,beanUrl.getUrlShort()); 
 		insertUrl.setString(3,beanUrl.getUrlReveal()); 
 		insertUrl.setString(4,beanUrl.getPassword());
+		insertUrl.setString(5, beanUrl.getKeyShort());
 		
 		insertUrl.executeUpdate();
 		
@@ -61,6 +61,7 @@ public class DAObeanUrl {
 				 beanUrl.setUrl(rsSelect.getString(1));
 				 beanUrl.setUrlShort(rsSelect.getString(2));
 				 beanUrl.setUrlReveal(rsSelect.getString(3));
+				 beanUrl.setKeyShort(rsSelect.getString(5));
 				
 				 listUrl.add(beanUrl);
 			 }
@@ -68,6 +69,34 @@ public class DAObeanUrl {
 			db.close(conn);
 			
 			return listUrl;
+			
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		return null;
+	}
+	
+	public static beanUrl get(String id) {
+		try {
+			java.sql.Connection	conn= initDB();
+			java.sql.PreparedStatement getOneUrl = conn.prepareStatement("SELECT * FROM url WHERE keyShort = ?;");
+			getOneUrl.setString(1,id); 
+			
+			ResultSet url = getOneUrl.executeQuery();
+			
+			if(url.next()) {
+				
+				beanUrl newUrl = new beanUrl();
+				newUrl.setUrl(url.getString(2));
+				newUrl.setUrlShort(url.getString(3));
+				newUrl.setPassword(url.getString(5));
+				db.close(conn);
+				return newUrl;
+			}else {
+				db.close(conn);
+				return null;
+			}
 			
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block

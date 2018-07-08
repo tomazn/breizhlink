@@ -37,7 +37,7 @@ public class urlShortener {
 			}
 			myChars[i] = (char) j;
 		}
-		domain = "http://fkt.in";
+		domain = "";
 	}
 
 	// Constructor which enables you to define tiny URL key length and base URL
@@ -46,7 +46,6 @@ public class urlShortener {
 		this();
 		this.keyLength = length;
 		if (!newDomain.isEmpty()) {
-			newDomain = sanitizeURL(newDomain);
 			domain = newDomain;
 		}
 	}
@@ -55,14 +54,12 @@ public class urlShortener {
 	// the public method which can be called to shorten a given URL
 	public String shortenURL(String longURL) {
 		String shortURL = "";
-		if (validateURL(longURL)) {
-			longURL = sanitizeURL(longURL);
 			if (valueMap.containsKey(longURL)) {
 				shortURL = domain + "/" + valueMap.get(longURL);
 			} else {
-				shortURL = domain + "/" + getKey(longURL);
+				String key =  getKey(longURL);
+				shortURL = domain + "/" + key;
 			}
-		}
 		// add http part
 		return shortURL;
 	}
@@ -76,30 +73,6 @@ public class urlShortener {
 		return longURL;
 	}
 
-	// Validate URL
-	// not implemented, but should be implemented to check whether the given URL
-	// is valid or not
-	boolean validateURL(String url) {
-		return true;
-	}
-
-	// sanitizeURL
-	// This method should take care various issues with a valid url
-	// e.g. www.google.com,www.google.com/, http://www.google.com,
-	// http://www.google.com/
-	// all the above URL should point to same shortened URL
-	// There could be several other cases like these.
-	String sanitizeURL(String url) {
-		if (url.substring(0, 7).equals("http://"))
-			url = url.substring(7);
-
-		if (url.substring(0, 8).equals("https://"))
-			url = url.substring(8);
-
-		if (url.charAt(url.length() - 1) == '/')
-			url = url.substring(0, url.length() - 1);
-		return url;
-	}
 
 	/*
 	 * Get Key method

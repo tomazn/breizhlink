@@ -41,7 +41,7 @@ public class urlin extends HttpServlet {
 		String url = request.getParameter("url");
 		String password = request.getParameter("password");
 		
-		urlShortener u = new urlShortener(5, "http://localhost:8080/breizhlink/");
+		urlShortener u = new urlShortener(5, getServletContext().getInitParameter("root_domain"));
 		
 		String urlShort = u.shortenURL(url);
 		String urlReveal = u.expandURL(urlShort);
@@ -51,6 +51,8 @@ public class urlin extends HttpServlet {
 		beanUrl.setUrlShort(urlShort);
 		beanUrl.setUrlReveal(urlReveal);
 		beanUrl.setPassword(password);
+		String keyShort = urlShort.replace(getServletContext().getInitParameter("root_domain") + "/", "");
+		beanUrl.setKeyShort(keyShort);
 		
 		request.setAttribute("url", beanUrl);
 		

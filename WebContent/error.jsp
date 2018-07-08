@@ -8,11 +8,5 @@
 </head>
 <body>
 <h1>404 PAGE NOT FOUND</h1>
-<% boolean login = (boolean)session.getAttribute("login"); %>
-<% if(login){ %>
-<a href="/Pouet/dashboard">return dashboard</a>
-<% }else{ %>
-<a href="/Pouet/login">return to login</a>
-<% } %>
 </body>
 </html>

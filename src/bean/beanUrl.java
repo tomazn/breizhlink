@@ -11,15 +11,27 @@ public class beanUrl {
 	private String urlShort;
 	private String urlReveal;
 	private String password;
+	private String keyShort;
 	
 	public beanUrl() {
 		this.url = "";
 		this.urlShort = "";
 		this.urlReveal = "";
 		this.password = "";
+		this.keyShort = "";
 	}
 
-	
+
+	public String getKeyShort() {
+		return keyShort;
+	}
+
+
+	public void setKeyShort(String keyShort) {
+		this.keyShort = keyShort;
+	}
+
+
 	public String getPassword() {
 		return password;
 	}
@@ -60,7 +72,10 @@ public class beanUrl {
 	
 	public static ArrayList<beanUrl> getAllUrl() throws SQLException {
 		return DAObeanUrl.getAllUrl();
-		
+	}
+	
+	public static beanUrl getOne(String id) throws SQLException {
+		return DAObeanUrl.get(id);
 	}
 	
 }
