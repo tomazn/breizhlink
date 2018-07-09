@@ -1,8 +1,8 @@
 <div class="col-1 panel p-15">
 <form method="POST" action="login">
 <div class="form-group">
-<label class="form-label" for="login">Identifiant</label>
-	<input class="input" type="text" id="login" name="login">
+<label class="form-label" for="email">Email</label>
+	<input class="input" type="text" id="email" name="email">
 </div>
 	<div class="form-group">
 	<label class="form-label" for="password">Mot de passe</label>

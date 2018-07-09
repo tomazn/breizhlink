@@ -60,8 +60,8 @@ public class login extends HttpServlet {
 			//Init database connection
 			java.sql.Connection conn = db.init(db_root,db_user,db_pwd);
 			//Prepared statement
-			java.sql.PreparedStatement selectUser = conn.prepareStatement("SELECT * FROM user WHERE login = ? AND password = ?");
-			selectUser.setString(1, request.getParameter("login"));
+			java.sql.PreparedStatement selectUser = conn.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
+			selectUser.setString(1, request.getParameter("email"));
 			selectUser.setString(2,request.getParameter("password")); 
 			
 			ResultSet rsSelect = selectUser.executeQuery();
@@ -71,7 +71,7 @@ public class login extends HttpServlet {
 			//If there is user, set session user's login
 			while(rsSelect.next()){
 				MySession.setAttribute("login", "true");
-				MySession.setAttribute("loginName", rsSelect.getString("login"));
+				MySession.setAttribute("loginName", rsSelect.getString("email"));
 				result = true;
 			}
 			

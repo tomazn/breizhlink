@@ -29,7 +29,7 @@ public class logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession MySession = request.getSession();
 		MySession.setAttribute("login", "false");
-		response.sendRedirect("/Pouet/login");
+		response.sendRedirect("/breizhlink");
 	}
 
 	/**

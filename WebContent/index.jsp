@@ -41,6 +41,9 @@
 			<li>
 				<a href="">Mon compte</a>
 			</li>
+				<li>
+				<a href="./logout">Déconnexion</a>
+			</li>
 		<% } %>
 		<% }else{ %>
 		<li>
