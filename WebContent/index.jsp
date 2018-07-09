@@ -62,7 +62,7 @@
 
 <% if(request.getAttribute("url") != null){ %>
 <jsp:useBean id="url" scope="session" class="bean.beanUrl"/>
-Votre url raccourcie : <a href="<jsp:getProperty name="url" property="urlShort"/>"><jsp:getProperty name="url" property="urlShort"/></a>
+Votre url raccourcie : <a target="_blank" href="<jsp:getProperty name="url" property="urlShort"/>"><jsp:getProperty name="url" property="urlShort"/></a>
 <% } %>
 
 </main>

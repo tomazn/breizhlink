@@ -58,10 +58,11 @@ public class DAObeanUrl {
 			
 			while(rsSelect.next()) {
 				 beanUrl beanUrl = new beanUrl();
-				 beanUrl.setUrl(rsSelect.getString(1));
-				 beanUrl.setUrlShort(rsSelect.getString(2));
-				 beanUrl.setUrlReveal(rsSelect.getString(3));
-				 beanUrl.setKeyShort(rsSelect.getString(5));
+				 beanUrl.setUrl(rsSelect.getString(2));
+				 beanUrl.setUrlShort(rsSelect.getString(3));
+				 beanUrl.setUrlReveal(rsSelect.getString(4));
+				 beanUrl.setPassword(rsSelect.getString(5));
+				 beanUrl.setKeyShort(rsSelect.getString(6));
 				
 				 listUrl.add(beanUrl);
 			 }
