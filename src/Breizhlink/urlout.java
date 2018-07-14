@@ -35,8 +35,6 @@ public class urlout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		String id = url.replace("/breizhlink/", "");
-		
-		
 		try {
 			beanUrl urlOut = new beanUrl();
 			urlOut = urlOut.getOne(id);
@@ -53,7 +51,6 @@ public class urlout extends HttpServlet {
 			}else {
 				response.sendRedirect("error.jsp");
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,10 +64,11 @@ public class urlout extends HttpServlet {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();		
 		beanUrl urlOut = (beanUrl) session.getAttribute("urlOut");
-		
 		String beanPassword = urlOut.getPassword();
 		if(password.equals(beanPassword)) {
-			response.sendRedirect(urlOut.getUrl());	
+			String url = urlOut.getUrl();
+			session.setAttribute("urlOut",null);
+			response.sendRedirect(url);	
 		}else{
 			String message = "";
 			message = "Wrong password";

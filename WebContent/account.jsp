@@ -4,19 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Index</title>
+<title>Account</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <main>
-
-<%@ include file="urlin.jsp" %>
-
-<% if(request.getAttribute("url") != null){ %>
-<jsp:useBean id="url" scope="session" class="bean.beanUrl"/>
-Votre url raccourcie : <a target="_blank" href="<jsp:getProperty name="url" property="urlShort"/>"><jsp:getProperty name="url" property="urlShort"/></a>
-<% } %>
-
+	<h1>My account</h1>
+	<a href="./account/personnal">Informations personnelles</a>
+	<a href="./account/urls">Mes urls</a>
 </main>
 <%@ include file="footer.jsp" %>
 </body>
