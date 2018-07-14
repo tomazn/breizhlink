@@ -17,7 +17,7 @@
 		<% String login = session.getAttribute("login").toString(); %>
 		<% if(login == "false"){ %>
 				<li>
-		<a href="">Création de compte</a>
+		<a href="./register">Création de compte</a>
 		</li>
 		<li>
 			<div>
