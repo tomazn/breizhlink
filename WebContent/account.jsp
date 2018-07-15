@@ -10,6 +10,11 @@
 <%@ include file="header.jsp" %>
 <main>
 	<h1>My account</h1>
+	<% 
+		String loginName = (String)session.getAttribute("loginName"); 
+		%>
+	<p>Bonjour <% if(loginName != null && loginName != ""){ out.println(loginName); } %>, vous pouvez désormais accéder à toutes nos options de création d'URL
+	raccourcies</p>
 	<a href="./account/personnal">Informations personnelles</a>
 	<a href="./account/urls">Mes urls</a>
 </main>

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
 import DB.db;
 
 /**
@@ -69,11 +72,23 @@ public class register extends HttpServlet {
 			//Init database connection
 			java.sql.Connection conn = db.init(db_root,db_user,db_pwd);
 			//Prepared statemen
-			java.sql.PreparedStatement insertUser = conn.prepareStatement("INSERT INTO user (email,password) VALUES (?,?);");
+			
+			java.sql.PreparedStatement insertUser = conn.prepareStatement("INSERT INTO user (email,password) VALUES (?,?);",PreparedStatement.RETURN_GENERATED_KEYS);
 			insertUser.setString(1, email);
 			insertUser.setString(2,password); 
 			
 			insertUser.executeUpdate();
+			
+			ResultSet rs = insertUser.getGeneratedKeys();
+
+			long id = 0;
+			
+			if (rs.next()) {
+				id = rs.getLong(1);
+			}
+			
+			MySession.setAttribute("loginId",id);
+			
 			db.close(conn);
 			}
 			//Close db
