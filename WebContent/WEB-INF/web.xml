@@ -57,6 +57,33 @@
     <url-pattern>/listUrl</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>account</servlet-name>
+    <servlet-class>Breizhlink.account</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>account</servlet-name>
+    <url-pattern>/account</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+    <servlet-name>personnal</servlet-name>
+    <servlet-class>Breizhlink.personnal</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>personnal</servlet-name>
+    <url-pattern>/account/personnal</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>urls</servlet-name>
+    <servlet-class>Breizhlink.urls</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>urls</servlet-name>
+    <url-pattern>/account/urls</url-pattern>
+  </servlet-mapping>
+  
   <context-param>
     <param-name>db_path</param-name>
     <param-value>jdbc:mysql://localhost:3306/JEE</param-value>

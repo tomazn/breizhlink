@@ -28,8 +28,11 @@
 			<li>
 				<a href="">Racourcir</a>
 			</li>
+			<% 
+		String loginName = (String)session.getAttribute("loginName"); 
+		%>
 			<li>
-				<a href="./account">Mon compte</a>
+				<a href="./account">Mon compte (<% if(loginName != null && loginName != ""){ out.println(loginName); } %>)</a>
 			</li>
 				<li>
 				<a href="./logout">Déconnexion</a>

@@ -39,6 +39,8 @@ public class register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession MySession = request.getSession();
+		MySession.setAttribute("login", "false");
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -79,8 +81,11 @@ public class register extends HttpServlet {
 			message = "User created";
 			request.setAttribute("message", message);
 			
+			MySession.setAttribute("login", "true");
+			MySession.setAttribute("loginName", email);
+			
 			RequestDispatcher rd = null;
-			rd = getServletContext().getRequestDispatcher("/index.jsp");
+			rd = getServletContext().getRequestDispatcher("/account.jsp");
 	        rd.forward(request, response);
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
