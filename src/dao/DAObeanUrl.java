@@ -25,15 +25,17 @@ public class DAObeanUrl {
 		return null;
 	}
 
-	public static void save(beanUrl beanUrl) throws SQLException {
+	public static void save(beanUrl beanUrl, Integer id) throws SQLException {
 		try {
+			
 		java.sql.Connection conn= initDB();
-		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort) VALUES (?,?,?,?,?);");
+		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort,user_id) VALUES (?,?,?,?,?,?);");
 		insertUrl.setString(1,beanUrl.getUrl()); 
 		insertUrl.setString(2,beanUrl.getUrlShort()); 
 		insertUrl.setString(3,beanUrl.getUrlReveal()); 
 		insertUrl.setString(4,beanUrl.getPassword());
 		insertUrl.setString(5, beanUrl.getKeyShort());
+		insertUrl.setInt(6, id);
 		
 		insertUrl.executeUpdate();
 		
@@ -53,6 +55,43 @@ public class DAObeanUrl {
 			java.sql.Statement stSelect = conn.createStatement();
 			
 			ResultSet rsSelect = stSelect.executeQuery(strQuery);
+			
+			ArrayList<beanUrl> listUrl = new ArrayList<beanUrl>();
+			
+			while(rsSelect.next()) {
+				 beanUrl beanUrl = new beanUrl();
+				 beanUrl.setUrl(rsSelect.getString(2));
+				 beanUrl.setUrlShort(rsSelect.getString(3));
+				 beanUrl.setUrlReveal(rsSelect.getString(4));
+				 beanUrl.setPassword(rsSelect.getString(5));
+				 beanUrl.setKeyShort(rsSelect.getString(6));
+				
+				 listUrl.add(beanUrl);
+			 }
+			
+			db.close(conn);
+			
+			return listUrl;
+			
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		return null;
+	}
+
+	public static ArrayList<beanUrl> getAllUrlById(long id) {
+		try {
+			java.sql.Connection	conn= initDB();
+			
+		
+			
+			java.sql.PreparedStatement selectUrlsById = conn.prepareStatement("SELECT * FROM url WHERE user_id = ?");
+			selectUrlsById.setLong(1, id);
+		
+			
+			ResultSet rsSelect = selectUrlsById.executeQuery();
+		
 			
 			ArrayList<beanUrl> listUrl = new ArrayList<beanUrl>();
 			

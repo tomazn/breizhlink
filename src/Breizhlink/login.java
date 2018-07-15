@@ -72,7 +72,7 @@ public class login extends HttpServlet {
 			while(rsSelect.next()){
 				MySession.setAttribute("login", "true");
 				MySession.setAttribute("loginName", rsSelect.getString("email"));
-				MySession.setAttribute("loginId", rsSelect.getString("id"));
+				MySession.setAttribute("loginId", rsSelect.getInt("id"));
 				result = true;
 			}
 			

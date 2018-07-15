@@ -81,10 +81,10 @@ public class register extends HttpServlet {
 			
 			ResultSet rs = insertUser.getGeneratedKeys();
 
-			long id = 0;
+			Integer id = 0;
 			
 			if (rs.next()) {
-				id = rs.getLong(1);
+				id = rs.getInt(1);
 			}
 			
 			MySession.setAttribute("loginId",id);

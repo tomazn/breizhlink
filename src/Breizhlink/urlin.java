@@ -38,6 +38,8 @@ public class urlin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession MySession = request.getSession();
+		
 		String url = request.getParameter("url");
 		String password = request.getParameter("password");
 		
@@ -57,7 +59,15 @@ public class urlin extends HttpServlet {
 		request.setAttribute("url", beanUrl);
 		
 		try {
-			beanUrl.save();
+			String login = (String) MySession.getAttribute("login");
+			Integer id;
+			if(login.equals("true")) {
+				 id = (Integer) MySession.getAttribute("loginId");
+			}else {
+				id = -1;
+			}
+			
+			beanUrl.save(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -66,12 +66,16 @@ public class beanUrl {
 		this.url = url;
 	}
 	
-	public void save() throws SQLException {
-		DAObeanUrl.save(this);
+	public void save(Integer id) throws SQLException {
+		DAObeanUrl.save(this, id);
 	}
 	
 	public static ArrayList<beanUrl> getAllUrl() throws SQLException {
 		return DAObeanUrl.getAllUrl();
+	}
+	
+	public static ArrayList<beanUrl> getAllUrlById(long id) throws SQLException {
+		return DAObeanUrl.getAllUrlById(id);
 	}
 	
 	public static beanUrl getOne(String id) throws SQLException {
