@@ -2,7 +2,7 @@
 <jsp:useBean id="urlOut" scope="session" class="bean.beanUrl"/>
 
 <% 
-		boolean outday = (boolean) request.getAttribute("outday"); 
+		boolean outday = (boolean) session.getAttribute("outday"); 
 		%>
 		<% if(outday == true){ %>
 		<p>url:
@@ -19,13 +19,6 @@
 <form action="urlout" method="POST">
 <label>Quel est le mot de passe?</label>
 <input type="text" placeholder="Mot de passe" name="password">
-
-<% 
-		boolean captcha = (boolean) request.getAttribute("captcha"); 
-		%>
-		<% if(captcha){ %>
-			<input type="text" placeholder="captcha" name="captcha">
-		<%  } %>
 
 <input type="submit" value="Envoyer"/>
 </form>

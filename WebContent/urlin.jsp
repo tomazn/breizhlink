@@ -1,9 +1,11 @@
+<div class="col-md-12">
 <form action="urlin" method="POST"> 
 <label>url:</label>
-<input type="text" name="url"/>
+<input type="text" class="form-control" name="url"/>
 <br>
 <label>password:</label>
-<input type="text" name="password"/>
+<input type="text" class="form-control"  name="password"/>
 <br>
-<input type=submit value="Raccourcir"> 
+<input type=submit class="btn btn-primary" value="Raccourcir"> 
 </form>
+</div>

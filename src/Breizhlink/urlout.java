@@ -47,20 +47,16 @@ public class urlout extends HttpServlet {
 			urlOut = urlOut.getOne(id);
 			
 			if(urlOut != null) {
+				session.setAttribute("urlOut", urlOut);
 				String password = urlOut.getPassword();
 				if(password != null && password != "") {
 					
-					if(urlOut.isCaptcha()) {
-						request.setAttribute("captcha", true);
-					}else {
-						request.setAttribute("captcha", false);
-					}
 					
 					java.util.Date minDate = urlOut.getMinDate();
 					java.util.Date maxDate = urlOut.getMaxDate();
 					//java.util.Date today = new java.util.Date();
 					
-					request.setAttribute("outday", false);
+					session.setAttribute("outday", false);
 					if(minDate != null && maxDate != null) {
 						DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 						java.util.Date today = Calendar.getInstance().getTime();        
@@ -78,13 +74,12 @@ public class urlout extends HttpServlet {
 						
 						if(_today.compareTo(_minDate) >= 0 && _maxDate.compareTo(_today) >= 0) {
 							//ok
-							request.setAttribute("outday", false);
+							session.setAttribute("outday", false);
 						}else {
-							request.setAttribute("outday", true);
+							session.setAttribute("outday", true);
 						}
 					}
 					
-					request.setAttribute("urlOut", urlOut);
 					this.getServletContext().getRequestDispatcher( "/urlout.jsp" ).forward( request, response );
 				}else {
 					response.sendRedirect(urlOut.getUrl());	
@@ -105,10 +100,14 @@ public class urlout extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+	
 		String password = request.getParameter("password");
-		HttpSession session = request.getSession();		
+		System.out.println(password);
+		
 		beanUrl urlOut = (beanUrl) session.getAttribute("urlOut");
-		String beanPassword = urlOut.getPassword();
+		String beanPassword = urlOut.getPassword();	
+		
 		if(password.equals(beanPassword)) {
 			String url = urlOut.getUrl();
 			session.setAttribute("urlOut",null);

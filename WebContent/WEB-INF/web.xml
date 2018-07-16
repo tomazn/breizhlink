@@ -93,6 +93,15 @@
     <url-pattern>/account/urls</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>*.css</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>*.js</url-pattern>
+</servlet-mapping>
+  
   <context-param>
     <param-name>db_path</param-name>
     <param-value>jdbc:mysql://localhost:3306/JEE</param-value>
