@@ -30,6 +30,15 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>shortener</servlet-name>
+    <servlet-class>Breizhlink.shortener</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>shortener</servlet-name>
+    <url-pattern>/shortener</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>Breizhlink.register</servlet-class>

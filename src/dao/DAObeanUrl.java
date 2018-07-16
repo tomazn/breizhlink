@@ -31,7 +31,7 @@ public class DAObeanUrl {
 		try {
 			
 		java.sql.Connection conn= initDB();
-		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort,user_id, created) VALUES (?,?,?,?,?,?,?);");
+		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort,user_id, created, captcha, minDate, maxDate, maxClick) VALUES (?,?,?,?,?,?,?,?,?,?,?);");
 		insertUrl.setString(1,beanUrl.getUrl()); 
 		insertUrl.setString(2,beanUrl.getUrlShort()); 
 		insertUrl.setString(3,beanUrl.getUrlReveal()); 
@@ -42,6 +42,34 @@ public class DAObeanUrl {
 		java.sql.Date date = new java.sql.Date(today.getTime());
 	
 		insertUrl.setDate(7, date);
+		
+		insertUrl.setBoolean(8, beanUrl.isCaptcha());
+		
+		Date minDateUrl = beanUrl.getMinDate();
+		
+		if(minDateUrl != null) {
+			java.util.Date minDate = minDateUrl;
+			java.sql.Date sqlMinDate = new java.sql.Date(minDate.getTime());
+			insertUrl.setDate(9, sqlMinDate);
+		}else {
+			insertUrl.setDate(9, null);
+		}
+		
+		Date maxDateUrl = beanUrl.getMaxDate();
+		
+		if(maxDateUrl != null) {
+			java.util.Date maxDate = maxDateUrl;
+			java.sql.Date sqlMaxDate = new java.sql.Date(maxDate.getTime());
+			insertUrl.setDate(10, sqlMaxDate);
+		}else {
+			insertUrl.setDate(10, null);
+		}
+		
+	
+	
+		
+		
+		insertUrl.setInt(11, beanUrl.getMaxClick());
 		
 		insertUrl.executeUpdate();
 		

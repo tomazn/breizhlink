@@ -14,6 +14,10 @@ public class beanUrl {
 	private String password;
 	private String keyShort;
 	private Date created;
+	private boolean captcha;
+	private Date minDate;
+	private Date maxDate;
+	private Integer maxClick;
 	
 	public beanUrl() {
 		this.url = "";
@@ -22,6 +26,46 @@ public class beanUrl {
 		this.password = "";
 		this.keyShort = "";
 		this.created = new Date();
+	}
+
+
+	public boolean isCaptcha() {
+		return captcha;
+	}
+
+
+	public void setCaptcha(boolean captcha) {
+		this.captcha = captcha;
+	}
+
+
+	public Date getMinDate() {
+		return minDate;
+	}
+
+
+	public void setMinDate(Date minDate) {
+		this.minDate = minDate;
+	}
+
+
+	public Date getMaxDate() {
+		return maxDate;
+	}
+
+
+	public void setMaxDate(Date maxDate) {
+		this.maxDate = maxDate;
+	}
+
+
+	public Integer getMaxClick() {
+		return maxClick;
+	}
+
+
+	public void setMaxClick(Integer maxClick) {
+		this.maxClick = maxClick;
 	}
 
 

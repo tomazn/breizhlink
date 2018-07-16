@@ -26,7 +26,7 @@
 		</li>
 		<% }else{ %>
 			<li>
-				<a href="">Racourcir</a>
+				<a href="./shortener">Racourcir</a>
 			</li>
 			<% 
 		String loginName = (String)session.getAttribute("loginName"); 

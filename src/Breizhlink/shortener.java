@@ -1,7 +1,9 @@
 package Breizhlink;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -16,15 +18,15 @@ import bean.beanUrl;
 import urlShortener.urlShortener;
 
 /**
- * Servlet implementation class urlin
+ * Servlet implementation class shortener
  */
-public class urlin extends HttpServlet {
+public class shortener extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public urlin() {
+    public shortener() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +35,26 @@ public class urlin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher( "/urlin.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( "/shortener.jsp" ).forward( request, response );
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession MySession = request.getSession();
+HttpSession MySession = request.getSession();
 		
 		String url = request.getParameter("url");
 		String password = request.getParameter("password");
+		String captcha = request.getParameter("captcha");
+		String minDate = request.getParameter("minDate");
+		String maxDate = request.getParameter("maxDate");
+		String maxClick = request.getParameter("maxClick");
+		
+		System.out.println(minDate);
+		System.out.println(maxDate);
+		System.out.println(captcha);
 		
 		urlShortener u = new urlShortener(5, getServletContext().getInitParameter("root_domain"));
 		
@@ -58,10 +69,18 @@ public class urlin extends HttpServlet {
 		String keyShort = urlShort.replace(getServletContext().getInitParameter("root_domain") + "/", "");
 		beanUrl.setKeyShort(keyShort);
 		
-		beanUrl.setCaptcha(false);
-		beanUrl.setMinDate(null);
-		beanUrl.setMaxDate(null);
-		beanUrl.setMaxClick(-1);
+		beanUrl.setCaptcha(captcha.equals("on") ? true : false);
+		  try {
+			  java.util.Date parseMindate = new SimpleDateFormat("yyyy-MM-dd").parse(minDate);  
+			  java.util.Date parseMaxdate = new SimpleDateFormat("yyyy-MM-dd").parse(maxDate);  
+			beanUrl.setMinDate(parseMindate);
+			beanUrl.setMaxDate(parseMaxdate);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		  
+		beanUrl.setMaxClick(Integer.parseInt(maxClick));
 		
 		request.setAttribute("url", beanUrl);
 		
@@ -80,7 +99,7 @@ public class urlin extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		this.getServletContext().getRequestDispatcher( "/index.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( "/shortener.jsp" ).forward( request, response );
 	}
 
 }
