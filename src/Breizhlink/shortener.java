@@ -51,11 +51,8 @@ HttpSession MySession = request.getSession();
 		String minDate = request.getParameter("minDate");
 		String maxDate = request.getParameter("maxDate");
 		String maxClick = request.getParameter("maxClick");
-		
-		System.out.println(minDate);
-		System.out.println(maxDate);
-		System.out.println(captcha);
-		
+	
+
 		urlShortener u = new urlShortener(5, getServletContext().getInitParameter("root_domain"));
 		
 		String urlShort = u.shortenURL(url);

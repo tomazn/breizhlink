@@ -166,6 +166,10 @@ public class DAObeanUrl {
 				newUrl.setUrl(url.getString(2));
 				newUrl.setUrlShort(url.getString(3));
 				newUrl.setPassword(url.getString(5));
+				newUrl.setCaptcha(url.getBoolean(9));
+				newUrl.setMinDate(url.getDate(10));
+				newUrl.setMaxDate(url.getDate(11));
+				newUrl.setMaxClick(url.getInt(12));
 				db.close(conn);
 				return newUrl;
 			}else {

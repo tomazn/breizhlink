@@ -1,7 +1,12 @@
 package Breizhlink;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +38,8 @@ public class urlout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 		String url = request.getRequestURI();
 		String id = url.replace("/breizhlink/", "");
 		try {
@@ -42,8 +49,42 @@ public class urlout extends HttpServlet {
 			if(urlOut != null) {
 				String password = urlOut.getPassword();
 				if(password != null && password != "") {
-					HttpSession session = request.getSession();
-					session.setAttribute("urlOut", urlOut);
+					
+					if(urlOut.isCaptcha()) {
+						request.setAttribute("captcha", true);
+					}else {
+						request.setAttribute("captcha", false);
+					}
+					
+					java.util.Date minDate = urlOut.getMinDate();
+					java.util.Date maxDate = urlOut.getMaxDate();
+					//java.util.Date today = new java.util.Date();
+					
+					request.setAttribute("outday", false);
+					if(minDate != null && maxDate != null) {
+						DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+						java.util.Date today = Calendar.getInstance().getTime();        
+						
+						String todayParse = df.format(today);
+						String minDateParse = df.format(minDate);
+						String maxDateParse = df.format(maxDate);
+						
+						 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+						    java.util.Date _today = format.parse(todayParse);
+						    java.util.Date _minDate = format.parse(minDateParse);
+						    java.util.Date _maxDate = format.parse(maxDateParse);						   
+						    
+						
+						if(_today.compareTo(_minDate) >= 0 && _maxDate.compareTo(_today) >= 0) {
+							//ok
+							request.setAttribute("outday", false);
+						}else {
+							request.setAttribute("outday", true);
+						}
+					}
+					
+					request.setAttribute("urlOut", urlOut);
 					this.getServletContext().getRequestDispatcher( "/urlout.jsp" ).forward( request, response );
 				}else {
 					response.sendRedirect(urlOut.getUrl());	
@@ -52,6 +93,9 @@ public class urlout extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
