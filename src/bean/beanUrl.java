@@ -3,6 +3,7 @@ package bean;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.DAObeanUrl;
 
@@ -12,6 +13,7 @@ public class beanUrl {
 	private String urlReveal;
 	private String password;
 	private String keyShort;
+	private Date created;
 	
 	public beanUrl() {
 		this.url = "";
@@ -19,6 +21,17 @@ public class beanUrl {
 		this.urlReveal = "";
 		this.password = "";
 		this.keyShort = "";
+		this.created = new Date();
+	}
+
+
+	public Date getCreated() {
+		return created;
+	}
+
+
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 
 

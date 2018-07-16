@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import DB.db;
 import bean.beanUrl;
@@ -29,13 +31,17 @@ public class DAObeanUrl {
 		try {
 			
 		java.sql.Connection conn= initDB();
-		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort,user_id) VALUES (?,?,?,?,?,?);");
+		java.sql.PreparedStatement insertUrl = conn.prepareStatement("INSERT INTO url (url,urlShort,urlReveal,password,keyShort,user_id, created) VALUES (?,?,?,?,?,?,?);");
 		insertUrl.setString(1,beanUrl.getUrl()); 
 		insertUrl.setString(2,beanUrl.getUrlShort()); 
 		insertUrl.setString(3,beanUrl.getUrlReveal()); 
 		insertUrl.setString(4,beanUrl.getPassword());
 		insertUrl.setString(5, beanUrl.getKeyShort());
 		insertUrl.setInt(6, id);
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+	
+		insertUrl.setDate(7, date);
 		
 		insertUrl.executeUpdate();
 		
@@ -102,7 +108,8 @@ public class DAObeanUrl {
 				 beanUrl.setUrlReveal(rsSelect.getString(4));
 				 beanUrl.setPassword(rsSelect.getString(5));
 				 beanUrl.setKeyShort(rsSelect.getString(6));
-				
+				 java.util.Date newDate = new Date(rsSelect.getDate("created").getTime());
+				 beanUrl.setCreated(newDate);
 				 listUrl.add(beanUrl);
 			 }
 			

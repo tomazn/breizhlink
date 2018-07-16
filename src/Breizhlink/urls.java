@@ -1,7 +1,9 @@
 package Breizhlink;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import bean.beanUrl;
 
@@ -39,6 +42,9 @@ ArrayList<beanUrl> listUrl = new ArrayList<beanUrl>();
 
 		try {
 			listUrl = beanUrl.getAllUrlById(id);
+			
+			java.util.Iterator<beanUrl> it = listUrl.iterator();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
